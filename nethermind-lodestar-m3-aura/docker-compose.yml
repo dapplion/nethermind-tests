@@ -1,0 +1,41 @@
+version: "3"
+services:
+  el:
+    image: nethermind/nethermind
+    network_mode: host
+    command: >
+      --config config
+      --Init.ChainSpecPath configs/spec.json
+      --JsonRpc.JwtSecretFile /shared/jwtsecret
+      --JsonRpc.Enabled true
+      --JsonRpc.Host 0.0.0.0
+      --JsonRpc.AdditionalRpcUrls "http://localhost:8545|http|net;eth;subscribe;engine;web3;client|no-auth,http://localhost:8551|http|eth;engine"
+      --Merge.TerminalTotalDifficulty 20
+    volumes:
+      - "./shared:/shared"
+      - "./nethermind:/nethermind/configs"
+
+  cl:
+    image: chainsafe/lodestar:next
+    network_mode: host
+    environment:
+      - LODESTAR_PRESET=minimal
+    command: >
+      dev
+      --genesisValidators 32
+      --startValidators 0..31
+      --api.rest.enabled
+      --api.rest.host 0.0.0.0
+      --logFile beacon.log
+      --logLevelFile debug
+      --logRotate
+      --logMaxFiles 5
+      --eth1.enabled=true
+      --eth1.providerUrls http://127.0.0.1:8545
+      --execution.urls http://127.0.0.1:8551
+      --jwt-secret /shared/jwtsecret
+      --params.ALTAIR_FORK_EPOCH 0
+      --params.BELLATRIX_FORK_EPOCH 1
+      --terminal-total-difficulty-override 1000000000000000000
+    volumes:
+      - "./shared:/shared"
