@@ -1,0 +1,9 @@
+version: "3"
+services:
+  nethermind:
+    image: nethermind/nethermind
+    network_mode: host
+    command: >
+      --config config
+    volumes:
+      - "./configs:/nethermind/configs"
