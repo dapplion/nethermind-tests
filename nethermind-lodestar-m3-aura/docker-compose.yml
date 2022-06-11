@@ -10,7 +10,7 @@ services:
       --JsonRpc.Enabled true
       --JsonRpc.Host 0.0.0.0
       --JsonRpc.AdditionalRpcUrls "http://localhost:8545|http|net;eth;subscribe;engine;web3;client|no-auth,http://localhost:8551|http|eth;engine"
-      --Merge.TerminalTotalDifficulty 20
+      --Merge.TerminalTotalDifficulty 1000000
     volumes:
       - "./shared:/shared"
       - "./nethermind:/nethermind/configs"
