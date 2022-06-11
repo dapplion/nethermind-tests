@@ -1,10 +1,13 @@
-# Nethermind 1 node AuRa
+# Nethermind solo node clique with keystores
 
 Configures private key for account `0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b` in
 
 ```json
-  "KeyStore": {
-    "TestNodeKey": "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8"
+ "KeyStore": {
+    "BlockAuthorAccount": "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
+    "PasswordFiles": ["./configs/password.txt"],
+    "KeyStoreDirectory": "./configs/keystores",
+    "UnlockAccounts": ["0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"]
   },
 ```
 

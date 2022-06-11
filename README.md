@@ -27,7 +27,6 @@ Example in `nethermind-solo-devnet-clique`
 
 pubkey: 0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541
 privkey: 0x81ca4772bbf26b62ce49f539ba603bab170f2a6fbc2661c7446c656eabcb6400
-password: testtest
 
 ```json
   "KeyStore": {
