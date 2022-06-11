@@ -5,7 +5,7 @@ services:
     network_mode: host
     command: >
       --config config
-      --Init.ChainSpecPath configs/spec.json
+      --Init.ChainSpecPath ./configs/spec.json
       --JsonRpc.JwtSecretFile /shared/jwtsecret
       --JsonRpc.Enabled true
       --JsonRpc.Host 0.0.0.0
