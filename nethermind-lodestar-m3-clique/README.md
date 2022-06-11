@@ -10,6 +10,14 @@ Ref https://hackmd.io/_9XZIkDBTlqGJejVnOSOJg?view
 
 ## How to
 
+**Run without merge-verifier**
+
+```
+docker-compose up
+```
+
+**Run with merge-verifier**
+
 ```
 docker-compose up
 ```
