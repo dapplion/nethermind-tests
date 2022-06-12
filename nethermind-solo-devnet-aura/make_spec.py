@@ -1,13 +1,10 @@
 #!/usr/bin/python
 
 import sys
-import inspect
-from web3.auto import w3
+import re
 from eth_abi import encode_abi
+from eth_utils import to_wei, is_address
 
-
-# TODO: Generate accounts from mnemonic
-w3.eth.account.enable_unaudited_hdwallet_features()
 
 # TODO: For test
 # address: 0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541
@@ -20,8 +17,8 @@ ownerAddress = "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
 miningAddresses = ["0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"]
 stakingAddresses = ["0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"]
 firstValidatorIsUnremovable = True
-delegatorMinStake = w3.toWei(1000, 'ether')
-candidateMinStake = w3.toWei(20000, 'ether')
+delegatorMinStake = to_wei(1000, 'ether')
+candidateMinStake = to_wei(20000, 'ether')
 stakingEpochDuration = 76
 stakingEpochStartBlock = 0
 stakeWithdrawDisallowPeriod = 10
@@ -40,19 +37,40 @@ CERTIFIER_CONTRACT = "0x5000000000000000000000000000000000000001"
 GOVERNANCE_CONTRACT = "0x6100000000000000000000000000000000000001"
 ############################
 
+# TEMPLATE ARGS
+OWNER_ADDRESS_TAG = "{{OWNER_ADDRESS}}"
+INITIALIZER_AURA_CONSTRUCTOR_ARGS_ENCODED_TAG = "{{INITIALIZER_AURA_CONSTRUCTOR_ARGS_ENCODED}}"
 
+
+# Parse CLI args. Example:
+# ```
+# python make_spec.py spec-posdao-template.json configs/spec.json
+# ```
 SOURCE_SPEC_FILEPATH = sys.argv[1]
 OUT_SPEC_FILEPATH = sys.argv[2]
 
+
+# Same ar String.replace() but ensures that there have been at least 1 substitution
+def ensureReplace(str_before, oldvalue, newvalue):
+  str_after = str.replace(str_before, oldvalue, newvalue)
+  if str_before == str_after:
+    raise Exception("str.replace did not change str with tag {0}".format(oldvalue))
+  return str_after
+
+
+# Read source file
 source_spec_file = open(SOURCE_SPEC_FILEPATH, mode="r")
 source_spec_str = source_spec_file.read()
 source_spec_file.close()
 
 # Replace owner
-ownerAddressNoPrefix = ownerAddress.replace("0x", "")
-source_spec_str = source_spec_str.replace(
-  "{{OWNER_ADDRESS}}",
-  ownerAddressNoPrefix
+if not is_address(ownerAddress):
+  raise Exception("Invalid address for ownerAddress {0}".format(ownerAddress))
+
+source_spec_str = ensureReplace(
+  source_spec_str,
+  OWNER_ADDRESS_TAG,
+  ownerAddress.replace("0x", "").lower()
 )
 
 # Replace InitializerAuRa constructor arguments
@@ -104,10 +122,15 @@ InitializerAuRaConstructorArgs = [
   collectRoundLength
 ]
 
-source_spec_str = source_spec_str.replace(
-  "{{INITIALIZER_AURA_CONSTRUCTOR_ARGS_ENCODED}}",
-  w3.toHex(encode_abi(InitializerAuRaConstructorAbi, InitializerAuRaConstructorArgs))
+source_spec_str = ensureReplace(
+  source_spec_str,
+  INITIALIZER_AURA_CONSTRUCTOR_ARGS_ENCODED_TAG,
+  encode_abi(InitializerAuRaConstructorAbi, InitializerAuRaConstructorArgs).hex()
 )
+
+# Ensure there are no tags left to replace
+if re.match("{{.*}}", source_spec_str):
+  raise Exception("Not all tags are replaced")
 
 out_spec_file = open(OUT_SPEC_FILEPATH, "w")
 out_spec_file.write(source_spec_str)

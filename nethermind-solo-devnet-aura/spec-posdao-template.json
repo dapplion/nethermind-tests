@@ -1,5 +1,5 @@
 {
-  "name": "DPoSChain",
+  "name": "spec_posdao_template",
   "engine": {
     "authorityRound": {
       "params": {
