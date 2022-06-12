@@ -1,7 +1,7 @@
 version: "3"
 services:
   el:
-    image: nethermind/nethermind
+    image: dapplion/nethermind:aura_merge
     network_mode: host
     command: >
       --config config
