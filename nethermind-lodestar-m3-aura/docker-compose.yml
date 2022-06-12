@@ -27,6 +27,7 @@ services:
       --logLevelFile debug
       --logRotate
       --logMaxFiles 5
+      --sync.isSingleNode
       --eth1.enabled=true
       --eth1.providerUrls http://127.0.0.1:8545
       --execution.urls http://127.0.0.1:8551
