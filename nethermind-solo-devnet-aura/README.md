@@ -1,6 +1,6 @@
 # Nethermind 1 node AuRa
 
-**Not able to configure**
+- `AllowAuRaPrivateChains` must be set to `true` for the chain to seal blocks. **TODO**: why?
 
 ## How to
 

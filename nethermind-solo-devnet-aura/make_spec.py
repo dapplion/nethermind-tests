@@ -17,6 +17,7 @@ from eth_utils import to_wei, is_address
 # To be changed arguments ##
 ############################
 # - Note: miningAddresses must not intersect stakingAddresses
+# - Note: miningAddresses is the one that must be set in BlockAuthorAccount
 ownerAddress = "0xfefefefefefefefefefefefefefefefefefefefe"
 miningAddresses = [
   "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
