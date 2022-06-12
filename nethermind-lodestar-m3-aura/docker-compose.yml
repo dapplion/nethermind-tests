@@ -7,7 +7,7 @@ services:
       --config config
       --Init.ChainSpecPath ./configs/spec.json
       --JsonRpc.JwtSecretFile /shared/jwtsecret
-      --Merge.TerminalTotalDifficulty 0x9ffffffffffffffffffffffffffffffec
+      --Merge.TerminalTotalDifficulty 3402823669209384634633746074317682114540
     # TTD 0x9ffffffffffffffffffffffffffffffec = 10 * 0xfffffffffffffffffffffffffffffffe = 3402823669209384634633746074317682114540
     # TTD 0x63ffffffffffffffffffffffffffffff38 = 100 * 0xfffffffffffffffffffffffffffffffe = 34028236692093846346337460743176821145400
     volumes:
