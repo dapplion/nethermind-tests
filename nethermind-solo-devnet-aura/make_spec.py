@@ -7,15 +7,21 @@ from eth_utils import to_wei, is_address
 
 
 # TODO: For test
+# 0
 # address: 0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541
-# privKey: 81ca4772bbf26b62ce49f539ba603bab170f2a6fbc2661c7446c656eabcb6400
+# privkey: 0x81ca4772bbf26b62ce49f539ba603bab170f2a6fbc2661c7446c656eabcb6400
 
 
 # To be changed arguments ##
 ############################
-ownerAddress = "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"
-miningAddresses = ["0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"]
-stakingAddresses = ["0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541"]
+# - Note: miningAddresses must not intersect stakingAddresses
+ownerAddress = "0xfefefefefefefefefefefefefefefefefefefefe"
+miningAddresses = [
+  "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
+]
+stakingAddresses = [
+  "0xfefefefefefefefefefefefefefefefefefefefe",
+]
 firstValidatorIsUnremovable = True
 delegatorMinStake = to_wei(1000, 'ether')
 candidateMinStake = to_wei(20000, 'ether')
