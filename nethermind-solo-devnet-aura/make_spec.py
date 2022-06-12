@@ -10,7 +10,9 @@ from eth_utils import to_wei, is_address
 # 0
 # address: 0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541
 # privkey: 0x81ca4772bbf26b62ce49f539ba603bab170f2a6fbc2661c7446c656eabcb6400
-
+# 1
+# address: 0x1258c99E6a9F61bB29264966B45972C4C428A48F
+# privkey: 0x716ad27cc318ca24a8e98002e6dc85122f47c09b6d8bfe215bf5b84bbe7e1abb
 
 # To be changed arguments ##
 ############################
@@ -20,7 +22,7 @@ miningAddresses = [
   "0x88dFc82CF71fdeb23f82C33a202f6E2D19AC0541",
 ]
 stakingAddresses = [
-  "0xfefefefefefefefefefefefefefefefefefefefe",
+  "0x1258c99E6a9F61bB29264966B45972C4C428A48F",
 ]
 firstValidatorIsUnremovable = True
 delegatorMinStake = to_wei(1000, 'ether')
